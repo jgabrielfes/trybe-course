@@ -1,11 +1,11 @@
 import styled from 'styled-components/native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import { WelcomeImage } from '../../assets/welcome';
 import { Text } from 'react-native-paper';
+import { FormContainer } from '../../components/FormContainer';
 import { Divider } from '../../components/Divider';
 import { Button } from '../../components/Button';
 
-export const Container = styled(KeyboardAwareScrollView)`
+export const Container = styled(FormContainer)`
   background-color: ${({ theme }) => theme.colors.background};
   flex: 1;
 `;

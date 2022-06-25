@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
-import { Button, HelperText } from 'react-native-paper';
+import { HelperText } from 'react-native-paper';
+import { Button } from '../../../components/Button';
 import { ControlledInput } from '../../../components/ControlledInput';
 
 export const Container = styled.View`

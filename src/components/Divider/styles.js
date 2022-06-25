@@ -12,5 +12,7 @@ export const MDivider = styled(Divider)`
 `;
 
 export const MChip = styled(Chip)`
+  background-color: ${({ theme }) => theme.colors.surfaceVariant}60;
+  border-radius: ${({ theme }) => theme.roundness * 5}px;
   margin: 0 12px;
 `;

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { TextInput, useTheme } from 'react-native-paper';
+import { TextInput } from 'react-native-paper';
 import { Container, Input, ForgotText, SubmitBtn } from './styles';
+import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -12,8 +13,8 @@ const schema = yup.object({
 });
 
 export function Form({ submitting, onSubmit }) {
-  const { colors } = useTheme();
   const [showPassword, setShowPassword] = useState(false);
+  const { navigate } = useNavigation();
 
   const { control, setFocus, handleSubmit } = useForm({
     defaultValues: { email: '', password: '' },
@@ -26,7 +27,7 @@ export function Form({ submitting, onSubmit }) {
         control={control}
         name="email"
         label="E-mail"
-        disabled={submitting}
+        editable={!submitting}
         onSubmitEditing={() => setFocus('password')}
         left={<TextInput.Icon name="email" />}
         autoCapitalize="none"
@@ -39,11 +40,12 @@ export function Form({ submitting, onSubmit }) {
         control={control}
         name="password"
         label="Senha"
-        disabled={submitting}
+        editable={!submitting}
         onSubmitEditing={handleSubmit(onSubmit)}
         left={<TextInput.Icon name="lock" />}
-        autoCapitalize="none"
         returnKeyType="done"
+        textContentType="newPassword"
+        keyboardType="ascii-capable"
         secureTextEntry={!showPassword}
         right={(
           <TextInput.Icon
@@ -54,17 +56,17 @@ export function Form({ submitting, onSubmit }) {
           />
         )}
       />
-      <TouchableOpacity onPress={() => { }}>
+      <TouchableOpacity disabled={submitting} onPress={() => navigate('forgotPassword')}>
         <ForgotText>
           Esqueci minha senha
         </ForgotText>
       </TouchableOpacity>
       <SubmitBtn
         mode="contained"
-        buttonColor={colors.secondary}
-        textColor={colors.onSecondary}
+        buttonColor="secondary"
+        textColor="onSecondary"
         loading={submitting}
-        onPress={submitting ? undefined : handleSubmit(onSubmit)}
+        onPress={handleSubmit(onSubmit)}
       >
         {submitting ? 'Entrando' : 'Entrar'}
       </SubmitBtn>
