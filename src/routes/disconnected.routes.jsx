@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useWindowDimensions } from 'react-native';
+import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import { Appbar as PAppbar } from 'react-native-paper';
 import { Appbar } from '../components/Appbar';
 import { Signin } from '../screens/Signin';
@@ -8,15 +9,22 @@ import { Signup } from '../screens/Signup';
 import { ForgotPassword } from '../screens/ForgotPassword';
 import { doChangeTheme } from '../store/reducers/configs';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 export function DisconnectedRoutes({ theme, colors }) {
   const dispatch = useDispatch();
+  const { width } = useWindowDimensions();
 
   return (
     <Stack.Navigator
+      initialRouteName="signin"
       screenOptions={{
-        fullScreenGestureEnabled: true,
+        ...TransitionPresets.SlideFromRightIOS,
+        cardShadowEnabled: true,
+        cardStyle: { backgroundColor: colors.background },
+        detachPreviousScreen: false,
+        gestureEnabled: true,
+        gestureResponseDistance: width,
         header: props => <Appbar {...props} iconColor={colors.primary} />,
         headerRight: () => (
           <PAppbar.Action

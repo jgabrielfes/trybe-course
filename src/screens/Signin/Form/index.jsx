@@ -43,7 +43,7 @@ export function Form({ submitting, onSubmit }) {
         editable={!submitting}
         onSubmitEditing={handleSubmit(onSubmit)}
         left={<TextInput.Icon name="lock" />}
-        returnKeyType="done"
+        returnKeyType="go"
         textContentType="newPassword"
         keyboardType="ascii-capable"
         secureTextEntry={!showPassword}

@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Container, Header, HeaderTitle, Title, Subtitle } from './styles';
+import { Container, Header, HeaderTitle, Title } from './styles';
 import { FirstForm } from './FirstForm';
 import { SecondForm } from './SecondForm';
 
@@ -27,9 +27,9 @@ export function Signup() {
       <Title variant="headlineLarge">
         Crie sua conta na Trybe
       </Title>
-      <Subtitle>
+      <Title>
         Leva menos de 1 minuto!
-      </Subtitle>
+      </Title>
       {currentForm === 'first' ? (
         <FirstForm defaultValues={firstForm} onSubmit={onFirstSubmit} />
       ) : (

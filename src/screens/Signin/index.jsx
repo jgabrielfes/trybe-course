@@ -1,17 +1,25 @@
 import React, { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useWindowDimensions } from 'react-native';
 import { Container, Header, Title, Separator, CreateBtn } from './styles';
 import { Alert } from '../../components/Alert';
 import { Form } from './Form';
+import { setUser } from '../../store/reducers/configs';
 
 export function Signin({ navigation }) {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState({ visible: false, message: '' });
+  const { height } = useWindowDimensions();
+  const dispatch = useDispatch();
 
   const onSubmit = useCallback(form => {
     setSubmitting(true);
     setTimeout(() => {
       if (form.email === 'jgabrielfes@gmail.com' && form.password === '123456') {
-        setSubmitting(false);
+        dispatch(setUser({
+          name: 'João Gabriel',
+          email: 'jgabrielfes@gmail.com',
+        }));
       } else {
         setSubmitting(false);
         setError({ visible: true, message: 'Senha inválida' });
@@ -22,7 +30,7 @@ export function Signin({ navigation }) {
   return (
     <>
       <Container automaticallyAdjustContentInsets={false}>
-        <Header width={197} height={159} />
+        <Header height={height / 4} />
         <Title variant="displaySmall">
           Entre para continuar
         </Title>

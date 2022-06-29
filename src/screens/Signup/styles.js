@@ -23,7 +23,3 @@ export const HeaderTitle = styled(Text)`
 export const Title = styled(Text)`
   margin: 0 20px;
 `;
-
-export const Subtitle = styled(Text)`
-  margin: 0 20px;
-`;

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   theme: null,
-  user: null,
+  user: { name: 'João Gabriel', email: 'jgabrielfes@gmail.com' },
 };
 
 export const configsSlice = createSlice({

@@ -37,7 +37,7 @@ export function FirstForm({ defaultValues, onSubmit }) {
         onSubmitEditing={handleSubmit(onSubmit)}
         autoCapitalize="none"
         autoComplete="email"
-        returnKeyType="go"
+        returnKeyType="done"
         keyboardType="email-address"
       />
       <SubmitBtn
