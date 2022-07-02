@@ -13,6 +13,8 @@ import { Projects } from '../screens/Projects';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
+// ANALISAR CONSTRUÇÃO DAS TELAS DO CURSO!!
+
 export function CourseRoutes({ colors }) {
   const { width } = useWindowDimensions();
   const navigation = useNavigation();
