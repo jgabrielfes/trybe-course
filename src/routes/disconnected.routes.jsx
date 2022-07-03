@@ -23,7 +23,6 @@ export function DisconnectedRoutes({ theme, colors }) {
         cardShadowEnabled: true,
         cardStyle: { backgroundColor: colors.background },
         detachPreviousScreen: false,
-        gestureEnabled: true,
         gestureResponseDistance: width,
         header: props => <Appbar {...props} iconColor={colors.primary} />,
         headerRight: () => (

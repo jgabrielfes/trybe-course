@@ -70,7 +70,7 @@ export function SecondForm({ doBackForm, onSubmit }) {
       ))}
       <BtnsContainer>
         <BackBtn
-          textColor="onSecondary"
+          textColor="onBackground"
           mode="outlined"
           onPress={doBackForm}
         >

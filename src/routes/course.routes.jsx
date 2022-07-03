@@ -8,16 +8,15 @@ import { Appbar as PAppbar } from 'react-native-paper';
 import { CourseDrawer } from '../components/CourseDrawer';
 import { Course } from '../screens/Course';
 import { Calendar } from '../screens/Calendar';
+import { Day } from '../screens/Day';
 import { Projects } from '../screens/Projects';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-// ANALISAR CONSTRUÇÃO DAS TELAS DO CURSO!!
-
 export function CourseRoutes({ colors }) {
   const { width } = useWindowDimensions();
-  const navigation = useNavigation();
+  const { dispatch } = useNavigation();
 
   return (
     <Stack.Navigator
@@ -27,7 +26,6 @@ export function CourseRoutes({ colors }) {
         cardShadowEnabled: true,
         cardStyle: { backgroundColor: colors.background },
         detachPreviousScreen: false,
-        gestureEnabled: true,
         gestureResponseDistance: width,
         header: props => <Appbar {...props} iconColor={colors.primary} />,
       }}
@@ -40,7 +38,7 @@ export function CourseRoutes({ colors }) {
               iconColor={colors.primary}
               isLeading
               icon="menu"
-              onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+              onPress={() => dispatch(DrawerActions.toggleDrawer())}
             />
           ),
         }}
@@ -62,6 +60,13 @@ export function CourseRoutes({ colors }) {
         )}
       </Stack.Screen>
       <Stack.Screen
+        name="projects"
+        component={Projects}
+        options={{
+          headerTitle: 'Projetos',
+        }}
+      />
+      <Stack.Screen
         name="calendar"
         component={Calendar}
         options={{
@@ -69,10 +74,10 @@ export function CourseRoutes({ colors }) {
         }}
       />
       <Stack.Screen
-        name="projects"
-        component={Projects}
+        name="day"
+        component={Day}
         options={{
-          headerTitle: 'Projetos',
+          headerTitle: 'Conteúdo',
         }}
       />
     </Stack.Navigator>
