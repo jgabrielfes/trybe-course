@@ -10,7 +10,7 @@ export function ContentCard({ Image, title, subtitle, caption, horizontal, onPre
       <Touchable
         horizontal={horizontal}
         onPress={onPress}
-        onPressIn={() => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)}
+        onPressIn={() => Haptics.selectionAsync()}
       >
         <Image
           height={!horizontal ? '100px' : '100%'}

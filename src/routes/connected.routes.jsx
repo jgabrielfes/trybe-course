@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { BottomNavigation, Text } from 'react-native-paper';
+import { BottomNavigation, Text, useTheme } from 'react-native-paper';
 import { CourseRoutes } from './course.routes';
-import { Account } from '../screens/Account';
+import { AccountRoutes } from './account.routes';
 import { LogoImage } from '../assets/logo';
 import * as Haptics from 'expo-haptics';
 
@@ -9,7 +9,8 @@ const AlbumsRoute = () => <Text>Albums</Text>;
 
 const RecentsRoute = () => <Text>Recents</Text>;
 
-export function ConnectedRoutes({ colors }) {
+export function ConnectedRoutes() {
+  const { colors } = useTheme();
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     {
@@ -23,10 +24,10 @@ export function ConnectedRoutes({ colors }) {
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
-    course: () => <CourseRoutes colors={colors} />,
+    course: CourseRoutes,
     career: AlbumsRoute,
     msc: RecentsRoute,
-    account: Account,
+    account: AccountRoutes,
   });
 
   return (
@@ -35,7 +36,7 @@ export function ConnectedRoutes({ colors }) {
       onIndexChange={setIndex}
       renderScene={renderScene}
       inactiveColor={colors.onSurface + '80'}
-      onTabPress={() => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)}
+      onTabPress={() => Haptics.selectionAsync()}
       activeColor="#fff"
       shifting
       barStyle={{ backgroundColor: colors.background }}

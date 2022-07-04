@@ -1,8 +1,9 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   theme: null,
-  user: { name: 'João Gabriel', email: 'jgabrielfes@gmail.com' },
+  user: null,
 };
 
 export const configsSlice = createSlice({
@@ -10,8 +11,19 @@ export const configsSlice = createSlice({
   initialState,
   reducers: {
     setTheme: (state, { payload }) => { state.theme = payload },
-    doChangeTheme: (state) => { state.theme = state.theme === 'light' ? 'dark' : 'light' },
-    setUser: (state, { payload }) => { state.user = payload },
+    doChangeTheme: (state) => {
+      const theme = state.theme === 'light' ? 'dark' : 'light';
+      AsyncStorage.setItem('theme', theme);
+      state.theme = theme;
+    },
+    setUser: (state, { payload }) => {
+      if (!payload) {
+        AsyncStorage.removeItem('user');
+      } else {
+        AsyncStorage.setItem('user', JSON.stringify(payload));
+      }
+      state.user = payload;
+    },
   },
 });
 

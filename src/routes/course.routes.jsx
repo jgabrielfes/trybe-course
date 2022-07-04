@@ -4,7 +4,7 @@ import { createStackNavigator, TransitionPresets } from '@react-navigation/stack
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
 import { Appbar } from '../components/Appbar';
-import { Appbar as PAppbar } from 'react-native-paper';
+import { Appbar as PAppbar, useTheme } from 'react-native-paper';
 import { CourseDrawer } from '../components/CourseDrawer';
 import { Course } from '../screens/Course';
 import { Calendar } from '../screens/Calendar';
@@ -14,9 +14,10 @@ import { Projects } from '../screens/Projects';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-export function CourseRoutes({ colors }) {
+export function CourseRoutes() {
   const { width } = useWindowDimensions();
   const { dispatch } = useNavigation();
+  const { colors } = useTheme();
 
   return (
     <Stack.Navigator

@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useWindowDimensions } from 'react-native';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
-import { Appbar as PAppbar } from 'react-native-paper';
+import { Appbar as PAppbar, useTheme } from 'react-native-paper';
 import { Appbar } from '../components/Appbar';
 import { Signin } from '../screens/Signin';
 import { Signup } from '../screens/Signup';
@@ -11,9 +11,10 @@ import { doChangeTheme } from '../store/reducers/configs';
 
 const Stack = createStackNavigator();
 
-export function DisconnectedRoutes({ theme, colors }) {
+export function DisconnectedRoutes({ theme }) {
   const dispatch = useDispatch();
   const { width } = useWindowDimensions();
+  const { colors } = useTheme();
 
   return (
     <Stack.Navigator

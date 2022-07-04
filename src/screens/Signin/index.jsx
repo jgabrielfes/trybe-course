@@ -5,6 +5,7 @@ import { Container, Header, Title, Separator, CreateBtn } from './styles';
 import { Alert } from '../../components/Alert';
 import { Form } from './Form';
 import { setUser } from '../../store/reducers/configs';
+import api from '../../services/api';
 
 export function Signin({ navigation }) {
   const [submitting, setSubmitting] = useState(false);
@@ -12,19 +13,16 @@ export function Signin({ navigation }) {
   const { height } = useWindowDimensions();
   const dispatch = useDispatch();
 
-  const onSubmit = useCallback(form => {
+  const onSubmit = useCallback(async form => {
     setSubmitting(true);
-    setTimeout(() => {
-      if (form.email === 'jgabrielfes@gmail.com' && form.password === '123456') {
-        dispatch(setUser({
-          name: 'João Gabriel',
-          email: 'jgabrielfes@gmail.com',
-        }));
-      } else {
-        setSubmitting(false);
-        setError({ visible: true, message: 'Senha inválida' });
-      }
-    }, 1500);
+
+    try {
+      const { user } = await api.authentication(form);
+      dispatch(setUser(user));
+    } catch {
+      setSubmitting(false);
+      setError({ visible: true, message: 'Credenciais inválidas' });
+    }
   }, []);
 
   return (

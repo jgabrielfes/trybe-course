@@ -1,25 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useColorScheme } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { ThemeProvider as StyledProvider } from 'styled-components';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ConnectedRoutes } from './connected.routes';
 import { DisconnectedRoutes } from './disconnected.routes';
 import themes from '../theme';
-import { setTheme } from '../store/reducers/configs';
+import { setTheme, setUser } from '../store/reducers/configs';
 
 export function Routes() {
   const dispatch = useDispatch();
   const { theme, user } = useSelector(state => state.configs);
+  const [loading, setLoading] = useState(true);
   const colorScheme = useColorScheme();
 
   useEffect(() => {
-    dispatch(setTheme(colorScheme));
+    async function load() {
+      const [user, theme] = await Promise.all([
+        AsyncStorage.getItem('user'),
+        AsyncStorage.getItem('theme'),
+      ]);
+      dispatch(setUser(user));
+      dispatch(setTheme(theme || colorScheme));
+      setLoading(false);
+    }
+    load();
   }, [])
 
-  if (!theme) return null;
+  if (loading) return null;
 
   return (
     <StyledProvider theme={themes[theme]}>
@@ -27,9 +38,9 @@ export function Routes() {
         <StatusBar style={theme === 'light' ? 'dark' : 'light'} />
         <NavigationContainer>
           {!!user ? (
-            <ConnectedRoutes colors={themes[theme].colors} />
+            <ConnectedRoutes />
           ) : (
-            <DisconnectedRoutes theme={theme} colors={themes[theme].colors} />
+            <DisconnectedRoutes theme={theme} />
           )}
         </NavigationContainer>
       </PaperProvider>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Container, LogoutBtn } from './styles';
+import { Container, Title, LogoutBtn } from './styles';
 import { setUser } from '../../store/reducers/configs';
 
 export function Account() {
@@ -8,6 +8,7 @@ export function Account() {
 
   return (
     <Container>
+      <Title variant="headlineLarge">João Ferraz</Title>
       <LogoutBtn
         mode="contained"
         buttonColor="secondary"
