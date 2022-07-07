@@ -2,16 +2,11 @@ import React from 'react';
 import { View } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Touchable, Container, Subtitle, Caption } from './styles';
-import * as Haptics from 'expo-haptics';
 
 export function ContentCard({ Image, title, subtitle, caption, horizontal, onPress, ...rest }) {
   return (
     <Container {...rest}>
-      <Touchable
-        horizontal={horizontal}
-        onPress={onPress}
-        onPressIn={() => Haptics.selectionAsync()}
-      >
+      <Touchable horizontal={horizontal} onPress={onPress}>
         <Image
           height={!horizontal ? '100px' : '100%'}
           width={horizontal ? '80px' : '100%'}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useColorScheme } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { ThemeProvider as StyledProvider } from 'styled-components';
 import { StatusBar } from 'expo-status-bar';
@@ -10,6 +11,7 @@ import { ConnectedRoutes } from './connected.routes';
 import { DisconnectedRoutes } from './disconnected.routes';
 import themes from '../theme';
 import { setTheme, setUser } from '../store/reducers/configs';
+
 
 export function Routes() {
   const dispatch = useDispatch();
@@ -23,7 +25,7 @@ export function Routes() {
         AsyncStorage.getItem('user'),
         AsyncStorage.getItem('theme'),
       ]);
-      dispatch(setUser(user));
+      dispatch(setUser(JSON.parse(user)));
       dispatch(setTheme(theme || colorScheme));
       setLoading(false);
     }
@@ -35,14 +37,16 @@ export function Routes() {
   return (
     <StyledProvider theme={themes[theme]}>
       <PaperProvider theme={themes[theme]}>
-        <StatusBar style={theme === 'light' ? 'dark' : 'light'} />
-        <NavigationContainer>
-          {!!user ? (
-            <ConnectedRoutes />
-          ) : (
-            <DisconnectedRoutes theme={theme} />
-          )}
-        </NavigationContainer>
+        <SafeAreaProvider>
+          <StatusBar style={theme === 'light' ? 'dark' : 'light'} />
+          <NavigationContainer>
+            {!!user ? (
+              <ConnectedRoutes />
+            ) : (
+              <DisconnectedRoutes />
+            )}
+          </NavigationContainer>
+        </SafeAreaProvider>
       </PaperProvider>
     </StyledProvider>
   );

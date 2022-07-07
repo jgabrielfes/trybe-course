@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Item } from './styles';
+import { Container, BottomContainer, Item } from './styles';
 import { doChangeTheme } from '../../store/reducers/configs';
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -30,11 +30,13 @@ export function CourseDrawer({ navigation }) {
         icon={props => <MaterialIcons {...props} name="school" />}
         label="Central de Soluções Estudantis"
       />
-      <Item
-        icon={props => <MaterialIcons {...props} name={`brightness-${theme === 'light' ? 4 : 7}`} />}
-        label={`Modo ${theme === 'light' ? 'escuro' : 'claro'}`}
-        onPress={() => dispatch(doChangeTheme())}
-      />
+      <BottomContainer>
+        <Item
+          icon={props => <MaterialIcons {...props} name={`brightness-${theme === 'light' ? 4 : 7}`} />}
+          label={`Modo ${theme === 'light' ? 'escuro' : 'claro'}`}
+          onPress={() => dispatch(doChangeTheme())}
+        />
+      </BottomContainer>
     </Container>
   );
 }

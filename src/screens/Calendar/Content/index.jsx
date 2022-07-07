@@ -1,26 +1,25 @@
 import React from 'react';
 import { Container, ListContainer, Section, Item } from './styles';
-import contents from '../../../utils/contents.json';
 import { useNavigation } from '@react-navigation/native';
 
-export function Content({ name }) {
-  const content = contents[name];
+export function Content({ content }) {
   const navigation = useNavigation();
 
   return (
     <ListContainer>
-      {content.map((section, index) => (
-        <Container key={`content-section-${index}`}>
+      {content.blocks.map(block => (
+        <Container key={block.id}>
           <Section
-            id={index + 1}
-            title={section.name}
-            description={`Bloco 0${index + 1}`}
+            id={block.block_order}
+            title={block.name}
+            description={`Bloco ${block.block_order.toString().padStart(2, '0')}`}
           >
-            {section.content.map((item, index) => (
+            {block.chapters.map(chapter => (
               <Item
-                key={`content-item-${index}`}
-                title={item.name}
-                onPress={() => navigation.navigate('day')}
+                key={chapter.content_id}
+                title={chapter.title}
+                description={`Dia ${chapter.order.toString().padStart(2, '0')}`}
+                onPress={() => navigation.navigate('day', { chapter })}
               />
             ))}
           </Section>

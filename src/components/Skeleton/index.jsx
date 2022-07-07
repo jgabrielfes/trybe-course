@@ -12,7 +12,7 @@ export function Skeleton({ height, width, ...rest }) {
       Animated.timing(translateX, {
         toValue: width,
         useNativeDriver: true,
-        duration: 1500,
+        duration: 1000,
       })
     ).start();
   }, []);

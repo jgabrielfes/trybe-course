@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import { Snackbar } from 'react-native-paper';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export const Container = styled(Snackbar)`
   background-color: ${({ theme, color }) => theme.colors[color] || undefined};
@@ -18,6 +18,6 @@ export const Text = styled.Text`
   margin-left: 6px;
 `;
 
-export const Icon = styled(MaterialIcons)`
+export const Icon = styled(MaterialCommunityIcons)`
   color: ${({ theme, color }) => theme.colors[color] || undefined};
 `;

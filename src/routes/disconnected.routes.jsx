@@ -11,10 +11,10 @@ import { doChangeTheme } from '../store/reducers/configs';
 
 const Stack = createStackNavigator();
 
-export function DisconnectedRoutes({ theme }) {
+export function DisconnectedRoutes() {
   const dispatch = useDispatch();
   const { width } = useWindowDimensions();
-  const { colors } = useTheme();
+  const { dark, colors } = useTheme();
 
   return (
     <Stack.Navigator
@@ -29,7 +29,7 @@ export function DisconnectedRoutes({ theme }) {
         headerRight: () => (
           <PAppbar.Action
             iconColor={colors.primary}
-            icon={`brightness-${theme === 'light' ? 4 : 7}`}
+            icon={`brightness-${dark ? 7 : 4}`}
             onPress={() => dispatch(doChangeTheme())}
           />
         ),

@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import { Routes } from './src/routes';
 import { Provider as ReduxProvider } from 'react-redux';
 import { store } from './src/store';

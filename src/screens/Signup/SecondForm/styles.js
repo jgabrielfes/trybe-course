@@ -10,14 +10,6 @@ export const Container = styled(Surface)`
 `;
 
 export const Input = styled(TextInput)`
-  margin-top: ${({ noMargin }) => noMargin ? 0 : 20}px;
-`;
-
-export const BtnsContainer = styled.View`
-  align-items: center;  
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 20px;
 `;
 
 export const RequireLabelContainer = styled.View`
@@ -39,10 +31,13 @@ export const RequireLabel = styled(HelperText)`
   min-width: ${({ fullWidth }) => fullWidth ? '100%' : 'auto'};
 `;
 
-export const BackBtn = styled(Button)`
-  min-width: 48%;
+export const BtnsContainer = styled.View`
+  align-items: center;  
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
 `;
 
-export const SubmitBtn = styled(Button)`
+export const ActionBtn = styled(Button)`
   min-width: 48%;
 `;

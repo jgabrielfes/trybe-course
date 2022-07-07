@@ -1,29 +1,34 @@
 import React from 'react';
-import { useWindowDimensions } from 'react-native';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
-import { useTheme } from 'react-native-paper';
-import { Appbar } from '../components/Appbar';
-import { Account } from '../screens/Account';
+import { useNavigation } from '@react-navigation/native';
+import { Appbar as PAppbar, useTheme } from 'react-native-paper';
+import { EditAccount } from '../screens/EditAccount';
 
 const Stack = createStackNavigator();
 
 export function AccountRoutes() {
-  const { width } = useWindowDimensions();
+  const { goBack } = useNavigation();
   const { colors } = useTheme();
 
   return (
-    <Stack.Navigator
-      initialRouteName="account"
-      screenOptions={{
-        ...TransitionPresets.SlideFromRightIOS,
-        cardShadowEnabled: true,
-        cardStyle: { backgroundColor: colors.background },
-        detachPreviousScreen: false,
-        gestureResponseDistance: width,
-        header: props => <Appbar {...props} iconColor={colors.primary} />,
-      }}
-    >
-      <Stack.Screen name="account" component={Account} />
-    </Stack.Navigator>
+    <>
+      <Stack.Screen
+        name="editAccount"
+        component={EditAccount}
+        options={{
+          ...TransitionPresets.ModalPresentationIOS,
+          headerBackVisible: false,
+          headerDisablePaddingTop: true,
+          headerLeft: () => (
+            <PAppbar.Action
+              iconColor={colors.primary}
+              isLeading
+              icon="close"
+              onPress={goBack}
+            />
+          ),
+        }}
+      />
+    </>
   );
 }

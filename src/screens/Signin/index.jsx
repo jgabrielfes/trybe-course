@@ -17,8 +17,8 @@ export function Signin({ navigation }) {
     setSubmitting(true);
 
     try {
-      const { user } = await api.authentication(form);
-      dispatch(setUser(user));
+      const { access_token, user } = await api.authentication(form);
+      dispatch(setUser({ access_token, ...user }));
     } catch {
       setSubmitting(false);
       setError({ visible: true, message: 'Credenciais inválidas' });
@@ -45,7 +45,7 @@ export function Signin({ navigation }) {
       </Container>
       <Alert
         mode="error"
-        icon="error-outline"
+        icon="alert-circle-outline"
         visible={error.visible}
         onDismiss={() => setError({ visible: false, message: error.message })}
       >

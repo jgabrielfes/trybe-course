@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "trybe-course",
+    "name": "Trybe",
     "slug": "trybe-course",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -24,7 +24,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#2FC18C"
-      }
+      },
+      "package": "com.trybe.course"
     }
   }
 }

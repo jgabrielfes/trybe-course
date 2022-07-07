@@ -7,8 +7,7 @@ import {
   RequireIcon,
   RequireLabel,
   BtnsContainer,
-  BackBtn,
-  SubmitBtn
+  ActionBtn,
 } from './styles';
 
 const ERRORS_LABELS = [
@@ -42,7 +41,6 @@ export function SecondForm({ doBackForm, onSubmit }) {
         autoFocus
         returnKeyType="done"
         textContentType="newPassword"
-        keyboardType="ascii-capable"
         secureTextEntry={!showPassword}
         right={(
           <TextInput.Icon
@@ -69,14 +67,14 @@ export function SecondForm({ doBackForm, onSubmit }) {
         </RequireLabelContainer>
       ))}
       <BtnsContainer>
-        <BackBtn
+        <ActionBtn
           textColor="onBackground"
           mode="outlined"
           onPress={doBackForm}
         >
           Voltar
-        </BackBtn>
-        <SubmitBtn
+        </ActionBtn>
+        <ActionBtn
           buttonColor="secondary"
           textColor="onSecondary"
           disabled={Object.values(ERRORS_LABELS).some(label => label.condition(password))}
@@ -84,7 +82,7 @@ export function SecondForm({ doBackForm, onSubmit }) {
           onPress={() => onSubmit(password)}
         >
           Criar conta
-        </SubmitBtn>
+        </ActionBtn>
       </BtnsContainer>
     </Container>
   );

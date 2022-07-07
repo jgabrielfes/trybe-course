@@ -15,4 +15,6 @@ export const Section = styled(List.Accordion)`
 `;
 
 export const Item = styled(List.Item)`
+  border-color: ${({ theme }) => theme.colors.surfaceVariant};
+  border-top-width: 1px;
 `;

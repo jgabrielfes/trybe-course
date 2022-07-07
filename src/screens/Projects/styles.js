@@ -3,7 +3,6 @@ import { StatusBar } from 'react-native';
 import { Text } from 'react-native-paper';
 
 export const Container = styled.ScrollView`
-  background-color: ${({ theme }) => theme.colors.background};
   flex: 1;
 `;
 

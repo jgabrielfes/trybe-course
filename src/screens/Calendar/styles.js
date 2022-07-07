@@ -1,8 +1,11 @@
 import styled from 'styled-components/native';
 import { Text } from 'react-native-paper';
 
+export const SafeContainer = styled.SafeAreaView`
+  flex: 1;
+`;
+
 export const Container = styled.ScrollView`
-  background-color: ${({ theme }) => theme.colors.background};
   flex: 1;
 `;
 

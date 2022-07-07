@@ -1,15 +1,45 @@
 import React from 'react';
 import { useWindowDimensions } from 'react-native';
-import { SkeletonArea } from './styles';
+import {
+  SkeletonTitle,
+  SkeletonSubtitle,
+  Container,
+  ContentContainer,
+  SkeletonArea,
+  SkeletonButton
+} from './styles';
 
 export function SkeletonSection() {
   const { width } = useWindowDimensions();
 
-  return [...new Array(4)].map((_, index) => (
-    <SkeletonArea
-      key={`calendar-skeleton-${index}`}
-      height={73}
-      width={width - 40}
-    />
-  ));
+  return (
+    <>
+      <SkeletonTitle
+        height={76}
+        width={width - 40}
+      />
+      <SkeletonSubtitle
+        height={28}
+        width={width - 40}
+      />
+      {[...new Array(3)].map((_, index) => (
+        <Container key={`skeleton-area-${index}`}>
+          <ContentContainer>
+            <SkeletonArea
+              height={14}
+              width={width - 160}
+            />
+            <SkeletonArea
+              height={14}
+              width={120}
+            />
+          </ContentContainer>
+          <SkeletonButton
+            height={30}
+            width={30}
+          />
+        </Container>
+      ))}
+    </>
+  );
 }

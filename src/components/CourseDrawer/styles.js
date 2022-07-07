@@ -8,4 +8,10 @@ export const Container = styled(Surface)`
   padding: 10px 0;
 `;
 
-export const Item = styled(Drawer.Item)``;
+export const BottomContainer = styled.View`
+  flex: 1;
+  justify-content: flex-end;
+`;
+
+export const Item = styled(Drawer.Item)`
+`;
