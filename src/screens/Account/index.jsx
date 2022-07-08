@@ -66,57 +66,61 @@ export function Account() {
     }
   }, [route.params]);
 
-  if (!profile) return <LoadingBackdrop size="large" />;
-
   return (
-    <Container>
-      <Title variant="headlineLarge">{profile.name}</Title>
+    <>
+      {!profile ? (
+        <LoadingBackdrop size="large" />
+      ) : (
+        <Container>
+          <Title variant="headlineLarge">{profile.name}</Title>
 
-      <Subtitle variant="titleMedium">{profile.full_name}</Subtitle>
+          <Subtitle variant="titleMedium">{profile.full_name}</Subtitle>
 
-      <Separator />
+          <Separator />
 
-      <LabelContainer>
-        <LabelIcon name="location-pin" size={30} />
-        <Label>
-          {profile.address}, {profile.residential_number}, {profile.neighborhood} / {profile.city} - {profile.state}
-        </Label>
-      </LabelContainer>
+          <LabelContainer>
+            <LabelIcon name="location-pin" size={30} />
+            <Label>
+              {profile.address}, {profile.residential_number}, {profile.neighborhood} / {profile.city} - {profile.state}
+            </Label>
+          </LabelContainer>
 
-      <LabelContainer>
-        <LabelIcon name="mail-outline" size={30} />
-        <Label>
-          {profile.email}
-        </Label>
-      </LabelContainer>
+          <LabelContainer>
+            <LabelIcon name="mail-outline" size={30} />
+            <Label>
+              {profile.email}
+            </Label>
+          </LabelContainer>
 
-      <LabelContainer last>
-        <LabelIcon name="phone" size={30} />
-        <Label>
-          {profile.phone_number}
-        </Label>
-      </LabelContainer>
+          <LabelContainer last>
+            <LabelIcon name="phone" size={30} />
+            <Label>
+              {profile.phone_number}
+            </Label>
+          </LabelContainer>
 
-      <Separator />
+          <Separator />
 
-      <LogoutContainer>
-        <LogoutBtn
-          mode="contained"
-          buttonColor="errorContainer"
-          textColor="onErrorContainer"
-          onPress={() => setConfirmLogout(true)}
-        >
-          Sair
-        </LogoutBtn>
-      </LogoutContainer>
+          <LogoutContainer>
+            <LogoutBtn
+              mode="contained"
+              buttonColor="errorContainer"
+              textColor="onErrorContainer"
+              onPress={() => setConfirmLogout(true)}
+            >
+              Sair
+            </LogoutBtn>
+          </LogoutContainer>
 
-      <ConfirmLogout
-        name={profile.name}
-        visible={confirmLogout}
-        onConfirm={() => dispatch(setUser(null))}
-        onCancel={() => setConfirmLogout(false)}
-      />
+          <ConfirmLogout
+            name={profile.name}
+            visible={confirmLogout}
+            onConfirm={() => dispatch(setUser(null))}
+            onCancel={() => setConfirmLogout(false)}
+          />
 
+        </Container>
+      )}
       <Alert
         mode="success"
         icon="checkbox-marked-circle-outline"
@@ -125,6 +129,6 @@ export function Account() {
       >
         Dados alterados com sucesso
       </Alert>
-    </Container>
+    </>
   );
 }

@@ -2,10 +2,12 @@ import React from 'react';
 import { Appbar, useTheme } from 'react-native-paper';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { DayDrawer } from '../components/DayDrawer';
+
+import { Attendances } from '../screens/Attendances';
+import { Projects } from '../screens/Projects';
 import { Calendar } from '../screens/Calendar';
 import { Day } from '../screens/Day';
-import { Projects } from '../screens/Projects';
+import { DayDrawer } from '../components/DayDrawer';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -14,6 +16,11 @@ export function CourseRoutes() {
   const { colors } = useTheme();
   return (
     <>
+      <Stack.Screen
+        name="attendances"
+        component={Attendances}
+        options={{ headerTitle: 'Frequência' }}
+      />
       <Stack.Screen
         name="projects"
         component={Projects}

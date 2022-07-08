@@ -22,7 +22,7 @@ export function SkeletonSection() {
         height={28}
         width={width - 40}
       />
-      {[...new Array(3)].map((_, index) => (
+      {[...new Array(Math.ceil(Math.random() * 8))].map((_, index) => (
         <Container key={`skeleton-area-${index}`}>
           <ContentContainer>
             <SkeletonArea

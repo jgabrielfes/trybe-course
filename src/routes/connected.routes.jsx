@@ -28,7 +28,7 @@ export function ConnectedRoutes() {
       unfocusedIcon: props => <LogoImage {...props} height={24} width={21} />,
     },
     { key: 'career', title: 'Carreira', focusedIcon: 'compass', unfocusedIcon: 'compass-outline' },
-    { key: 'msc', title: 'MSC', focusedIcon: 'trophy', unfocusedIcon: 'trophy-outline' },
+    { key: 'msc', title: 'MSC', focusedIcon: 'trophy', unfocusedIcon: 'trophy-outline', badge: true },
     { key: 'account', title: 'Conta', focusedIcon: 'account-circle', unfocusedIcon: 'account-circle-outline' },
   ]);
 
@@ -78,7 +78,6 @@ export function ConnectedRoutes() {
             renderScene={renderScene}
             inactiveColor={colors.onSurface + '80'}
             activeColor="#fff"
-            shifting
             keyboardHidesNavigationBar={false}
             theme={{ colors: { secondaryContainer: colors.primary, surface: colors.primary + '14' } }}
           />

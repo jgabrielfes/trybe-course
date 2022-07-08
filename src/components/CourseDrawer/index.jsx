@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, BottomContainer, Item } from './styles';
+import { Container, BottomContainer, Item, Notification } from './styles';
 import { doChangeTheme } from '../../store/reducers/configs';
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -13,6 +13,7 @@ export function CourseDrawer({ navigation }) {
       <Item
         icon={props => <MaterialIcons {...props} name="computer" />}
         label="Projetos"
+        right={props => <Notification {...props}>3</Notification>}
         onPress={() => {
           navigation.closeDrawer();
           navigation.navigate('projects');

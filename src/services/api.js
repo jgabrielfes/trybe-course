@@ -2,8 +2,20 @@ import axios from 'axios';
 
 export default {
   cep: async (cep) => await axios.get(`viacep.com.br/ws/${cep}/json/`),
+
   authentication: async (payload) => {
     const { data: { data } } = await axios.post('https://api.betrybe.com/api/accounts/login', payload);
+    return data;
+  },
+
+  attendance: async (token, signal) => {
+    const { data: { data } } = await axios.get('https://api.betrybe.com/student_area/v1/student_attendance', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      signal,
+    });
+
     return data;
   },
 
@@ -12,6 +24,17 @@ export default {
       headers: { Authorization: `Bearer ${token}` },
       signal,
     });
+    return data;
+  },
+
+  projects: async (token, signal) => {
+    const { data } = await axios.get('https://api.betrybe.com/student_area/v2/projects', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      signal,
+    })
+
     return data;
   },
 

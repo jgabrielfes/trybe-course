@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Appbar, useTheme } from 'react-native-paper';
 import { useWindowDimensions } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { useSelector } from 'react-redux';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
-import { Container, Separator } from './styles';
+import { LoadingBackdrop, AttendanceBtn, Container, Separator } from './styles';
 import { CourseDrawer } from '../../components/CourseDrawer';
 import { Content } from './Content'
 import { SupContent } from './SupContent'
+import axios from 'axios';
+import api from '../../services/api';
 
 const Drawer = createDrawerNavigator();
 
@@ -14,21 +17,45 @@ export function Course() {
   const { width } = useWindowDimensions();
   const navigation = useNavigation();
   const { colors } = useTheme();
+  const { user } = useSelector(state => state.configs);
+  const [loading, setLoading] = useState(true);
+  const controller = new AbortController();
 
   useEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => (
-        <Appbar.Action
-          iconColor={colors.primary}
-          isLeading
-          icon="menu"
-          onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-        />
-      ),
-    });
+    async function load() {
+      try {
+        const attendance = await api.attendance(user.access_token, controller.signal)
 
-    return () => navigation.setOptions({ headerLeft: undefined });
+        navigation.setOptions({
+          headerLeft: () => (
+            <Appbar.Action
+              iconColor={colors.primary}
+              isLeading
+              icon="menu"
+              onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+            />
+          ),
+          headerRight: () => (
+            <AttendanceBtn onPress={() => navigation.navigate('attendances', { absences: attendance.absences })}>
+              Faltas {attendance.absence_days}/{attendance.max_absence_days}
+            </AttendanceBtn>
+          ),
+        });
+
+        setLoading(false);
+      } catch (err) {
+        if (!axios.isCancel(err)) console.warn(err);
+      }
+    }
+
+    load();
+    return () => {
+      controller.abort();
+      navigation.setOptions({ headerLeft: undefined, headerRight: undefined });
+    };
   }, []);
+
+  if (loading) return <LoadingBackdrop size="large" />;
 
   return (
     <Drawer.Navigator

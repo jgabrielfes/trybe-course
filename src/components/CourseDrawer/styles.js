@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { Surface, Drawer } from 'react-native-paper';
+import { Surface, Drawer, Badge } from 'react-native-paper';
 
 export const Container = styled(Surface)`
   border-radius: ${({ theme }) => theme.roundness * 4}px;
@@ -14,4 +14,8 @@ export const BottomContainer = styled.View`
 `;
 
 export const Item = styled(Drawer.Item)`
+`;
+
+export const Notification = styled(Badge)`
+  align-self: center;
 `;
