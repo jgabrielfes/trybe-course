@@ -5,7 +5,6 @@ import { Divider } from '../../components/Divider';
 import { Button } from '../../components/Button';
 
 export const LoadingBackdrop = styled(ActivityIndicator)`
-  background-color: #0008;
   flex: 1;
 `;
 

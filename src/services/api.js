@@ -38,6 +38,17 @@ export default {
     return data;
   },
 
+  project: async (id, token, signal) => {
+    const { data } = await axios.get(`https://api.betrybe.com/student_area/v2/projects/${id}/achievements`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      signal,
+    })
+
+    return data;
+  },
+
   content: async (module, token, signal) => {
     const { data } = await axios.get(`https://course.betrybe.com/api/v2/content/modules/${module}`, {
       headers: {

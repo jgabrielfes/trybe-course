@@ -52,10 +52,7 @@ export function Account() {
 
   useEffect(() => {
     load();
-    return () => {
-      navigation.setOptions({ headerRight: undefined });
-      controller.abort();
-    };
+    return () => controller.abort();
   }, []);
 
   useEffect(() => {

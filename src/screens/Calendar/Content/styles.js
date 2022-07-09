@@ -1,13 +1,13 @@
 import styled from 'styled-components/native';
 import { Surface, List } from 'react-native-paper';
 
+export const ListContainer = styled(List.AccordionGroup)`
+`;
+
 export const Container = styled(Surface)`
   border-radius: ${({ theme }) => theme.roundness * 4}px;
   margin: 0 20px 10px;
   overflow: hidden;
-`;
-
-export const ListContainer = styled(List.AccordionGroup)`
 `;
 
 export const Section = styled(List.Accordion)`

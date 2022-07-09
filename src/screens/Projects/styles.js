@@ -1,8 +1,7 @@
 import styled from 'styled-components/native';
-import { StatusBar } from 'react-native';
 import { Text } from 'react-native-paper';
 
-export const Container = styled.ScrollView`
+export const Container = styled.View`
   flex: 1;
 `;
 

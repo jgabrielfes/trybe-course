@@ -36,8 +36,13 @@ export function Course() {
             />
           ),
           headerRight: () => (
-            <AttendanceBtn onPress={() => navigation.navigate('attendances', { absences: attendance.absences })}>
-              Faltas {attendance.absence_days}/{attendance.max_absence_days}
+            <AttendanceBtn
+              onPress={() => {
+                navigation.dispatch(DrawerActions.closeDrawer());
+                navigation.navigate('attendances', { absences: attendance.absences });
+              }}
+            >
+              Faltas: {attendance.absence_days}/{attendance.max_absence_days}
             </AttendanceBtn>
           ),
         });
@@ -49,13 +54,8 @@ export function Course() {
     }
 
     load();
-    return () => {
-      controller.abort();
-      navigation.setOptions({ headerLeft: undefined, headerRight: undefined });
-    };
+    return () => controller.abort();
   }, []);
-
-  if (loading) return <LoadingBackdrop size="large" />;
 
   return (
     <Drawer.Navigator
@@ -64,13 +64,14 @@ export function Course() {
       screenOptions={{
         drawerStyle: { backgroundColor: 'transparent', marginVertical: 10 },
         drawerType: 'front',
+        sceneContainerStyle: { backgroundColor: colors.background },
         headerShown: false,
         overlayColor: '#000b',
         swipeEdgeWidth: width,
       }}
     >
       <Drawer.Screen name="drawerCourse">
-        {() => (
+        {() => loading ? <LoadingBackdrop size="large" /> : (
           <Container>
             <Content />
             <Separator>Conteúdos Complementares</Separator>

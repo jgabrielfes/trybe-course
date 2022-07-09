@@ -5,6 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { Attendances } from '../screens/Attendances';
 import { Projects } from '../screens/Projects';
+import { Project } from '../screens/Project';
 import { Calendar } from '../screens/Calendar';
 import { Day } from '../screens/Day';
 import { DayDrawer } from '../components/DayDrawer';
@@ -25,6 +26,10 @@ export function CourseRoutes() {
         name="projects"
         component={Projects}
         options={{ headerTitle: 'Projetos' }}
+      />
+      <Stack.Screen
+        name="project"
+        component={Project}
       />
       <Stack.Screen
         name="calendar"

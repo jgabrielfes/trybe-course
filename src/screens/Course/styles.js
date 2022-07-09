@@ -8,10 +8,10 @@ export const LoadingBackdrop = styled(ActivityIndicator)`
 `;
 
 export const AttendanceBtn = styled(Button)`
+  margin-right: 4px;
 `;
 
 export const Container = styled.ScrollView`
-  background-color: ${({ theme }) => theme.colors.background};
   flex: 1;
 `;
 

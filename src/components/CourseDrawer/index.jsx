@@ -13,7 +13,7 @@ export function CourseDrawer({ navigation }) {
       <Item
         icon={props => <MaterialIcons {...props} name="computer" />}
         label="Projetos"
-        right={props => <Notification {...props}>3</Notification>}
+        right={props => <Notification {...props}>1</Notification>}
         onPress={() => {
           navigation.closeDrawer();
           navigation.navigate('projects');

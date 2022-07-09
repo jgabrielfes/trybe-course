@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { TouchableOpacity, useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BottomNavigation, useTheme } from 'react-native-paper';
@@ -16,21 +16,28 @@ import { LogoImage } from '../assets/logo';
 
 const Stack = createStackNavigator();
 
+const ROUTES = [
+  {
+    key: 'course', title: 'Curso',
+    focusedIcon: props => <LogoImage {...props} height={24} width={21} />,
+    unfocusedIcon: props => <LogoImage {...props} height={24} width={21} />,
+  },
+  { key: 'career', title: 'Carreira', focusedIcon: 'compass', unfocusedIcon: 'compass-outline' },
+  { key: 'msc', title: 'MSC', focusedIcon: 'trophy', unfocusedIcon: 'trophy-outline', badge: true },
+  { key: 'account', title: 'Conta', focusedIcon: 'account-circle', unfocusedIcon: 'account-circle-outline' },
+];
+
 export function ConnectedRoutes() {
   const { width } = useWindowDimensions();
   const { bottom } = useSafeAreaInsets();
   const { colors } = useTheme();
   const [index, setIndex] = useState(0);
-  const [routes] = useState([
-    {
-      key: 'course', title: 'Curso',
-      focusedIcon: props => <LogoImage {...props} height={24} width={21} />,
-      unfocusedIcon: props => <LogoImage {...props} height={24} width={21} />,
-    },
-    { key: 'career', title: 'Carreira', focusedIcon: 'compass', unfocusedIcon: 'compass-outline' },
-    { key: 'msc', title: 'MSC', focusedIcon: 'trophy', unfocusedIcon: 'trophy-outline', badge: true },
-    { key: 'account', title: 'Conta', focusedIcon: 'account-circle', unfocusedIcon: 'account-circle-outline' },
-  ]);
+
+  const handleTab = useCallback(navigation => ({ route }) => {
+    if (route.key !== ROUTES[index].key) {
+      navigation.setOptions({ headerLeft: undefined, headerRight: undefined });
+    }
+  });
 
   const renderTouchable = useCallback(props => (
     <TouchableOpacity
@@ -43,7 +50,7 @@ export function ConnectedRoutes() {
   ), []);
 
   const scene = useCallback(screen => props => {
-    if (routes[index].key !== props.route.key) return null;
+    if (ROUTES[index].key !== props.route.key) return null;
     return screen(props);
   }, [index]);
 
@@ -60,7 +67,7 @@ export function ConnectedRoutes() {
       screenOptions={{
         ...TransitionPresets.SlideFromRightIOS,
         cardShadowEnabled: true,
-        cardStyle: { backgroundColor: colors.background, borderBottomWidth: bottom, borderColor: colors.primary + 14 },
+        cardStyle: { backgroundColor: colors.background, paddingBottom: bottom },
         detachPreviousScreen: false,
         gestureResponseDistance: width,
         header: props => <Appbar {...props} iconColor={colors.primary} />,
@@ -70,10 +77,11 @@ export function ConnectedRoutes() {
         name="connected"
         options={{ cardStyle: { backgroundColor: colors.background } }}
       >
-        {() => (
+        {({ navigation }) => (
           <BottomNavigation
-            navigationState={{ index, routes }}
+            navigationState={{ index, routes: ROUTES }}
             onIndexChange={setIndex}
+            onTabPress={handleTab(navigation)}
             renderTouchable={renderTouchable}
             renderScene={renderScene}
             inactiveColor={colors.onSurface + '80'}
