@@ -1,19 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, BottomContainer, Item, Notification } from './styles';
 import { doChangeTheme } from '../../store/reducers/configs';
 import { MaterialIcons } from '@expo/vector-icons';
+import axios from 'axios';
+import api from '../../services/api';
 
 export function CourseDrawer({ navigation }) {
   const dispatch = useDispatch();
-  const { theme } = useSelector(state => state.configs);
+  const { theme, user } = useSelector(state => state.configs);
+  const [activeProjects, setActiveProjects] = useState(0);
+  const controller = new AbortController();
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const projects = await api.projects(user.access_token, controller.signal);
+        setActiveProjects(projects.filter(p => p.active).length);
+      } catch (err) {
+        if (!axios.isCancel(err)) console.warn(err);
+      }
+    }
+
+    load();
+    return () => controller.abort();
+  }, []);
 
   return (
     <Container>
       <Item
         icon={props => <MaterialIcons {...props} name="computer" />}
         label="Projetos"
-        right={props => <Notification {...props}>1</Notification>}
+        right={props => activeProjects ? <Notification {...props}>{activeProjects}</Notification> : undefined}
         onPress={() => {
           navigation.closeDrawer();
           navigation.navigate('projects');

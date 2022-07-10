@@ -13,7 +13,7 @@ import {
   Description
 } from './styles';
 
-export default memo(({ company, onPress, ...rest }) => {
+export const HiringPartnerCard = memo(({ company, onPress, ...rest }) => {
   const [loadingLogo, setLoadingLogo] = useState(true);
 
   return (

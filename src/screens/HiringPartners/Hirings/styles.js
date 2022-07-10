@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import { Surface, ActivityIndicator } from 'react-native-paper';
-import HiringPartnerCard from '../../../components/HiringPartnerCard';
+import { HiringPartnerCard } from '../../../components/HiringPartnerCard';
 
 export const LoadingContainer = styled(Surface)`
   align-items: center;

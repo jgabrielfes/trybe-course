@@ -40,7 +40,7 @@ export function Account() {
         headerRight: () => (
           <Appbar.Action
             iconColor={colors.primary}
-            icon="pencil"
+            icon="account-edit"
             onPress={() => navigation.navigate('editAccount', { profile })}
           />
         ),

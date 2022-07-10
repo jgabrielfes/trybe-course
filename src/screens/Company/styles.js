@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 import { ActivityIndicator, Text } from 'react-native-paper';
 import { Skeleton } from '../../components/Skeleton';
 import { Divider } from '../../components/Divider';
+import { Button } from '../../components/Button';
 
 export const LoadingBackdrop = styled(ActivityIndicator)`
   flex: 1;
@@ -34,6 +35,10 @@ export const Name = styled(Text)`
 
 export const Separator = styled(Divider)`
   margin: 20px;
+`;
+
+export const TryberButton = styled(Button)`
+  align-self: center;
 `;
 
 export const Title = styled(Text)`
