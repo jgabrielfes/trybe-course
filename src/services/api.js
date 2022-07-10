@@ -10,9 +10,25 @@ export default {
 
   attendance: async (token, signal) => {
     const { data: { data } } = await axios.get('https://api.betrybe.com/student_area/v1/student_attendance', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { Authorization: `Bearer ${token}` },
+      signal,
+    });
+
+    return data;
+  },
+
+  company: async (id, token, signal) => {
+    const { data } = await axios.get(`https://apig.betrybe.com/api/student_success/v1/companies/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+      signal,
+    })
+
+    return data;
+  },
+
+  companies: async (token, signal) => {
+    const { data } = await axios.get('https://apig.betrybe.com/api/student_success/v1/companies', {
+      headers: { Authorization: `Bearer ${token}` },
       signal,
     });
 
@@ -29,9 +45,7 @@ export default {
 
   projects: async (token, signal) => {
     const { data } = await axios.get('https://api.betrybe.com/student_area/v2/projects', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { Authorization: `Bearer ${token}` },
       signal,
     })
 
@@ -40,9 +54,7 @@ export default {
 
   project: async (id, token, signal) => {
     const { data } = await axios.get(`https://api.betrybe.com/student_area/v2/projects/${id}/achievements`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { Authorization: `Bearer ${token}` },
       signal,
     })
 

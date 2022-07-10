@@ -37,7 +37,7 @@ export function Day({ navigation, route }) {
     }
     load();
 
-    return () => controller.abort;
+    return () => controller.abort();
   }, []);
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import { Appbar as PAppbar, useTheme } from 'react-native-paper';
+import { Appbar, useTheme } from 'react-native-paper';
 import {
   LoadingBackdrop,
   Container,
@@ -38,7 +38,7 @@ export function Account() {
       setProfile(profile);
       navigation.setOptions({
         headerRight: () => (
-          <PAppbar.Action
+          <Appbar.Action
             iconColor={colors.primary}
             icon="pencil"
             onPress={() => navigation.navigate('editAccount', { profile })}

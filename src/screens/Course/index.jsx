@@ -27,14 +27,6 @@ export function Course() {
         const attendance = await api.attendance(user.access_token, controller.signal)
 
         navigation.setOptions({
-          headerLeft: () => (
-            <Appbar.Action
-              iconColor={colors.primary}
-              isLeading
-              icon="menu"
-              onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-            />
-          ),
           headerRight: () => (
             <AttendanceBtn
               onPress={() => {
@@ -52,6 +44,17 @@ export function Course() {
         if (!axios.isCancel(err)) console.warn(err);
       }
     }
+
+    navigation.setOptions({
+      headerLeft: () => (
+        <Appbar.Action
+          iconColor={colors.primary}
+          isLeading
+          icon="menu"
+          onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+        />
+      ),
+    });
 
     load();
     return () => controller.abort();
