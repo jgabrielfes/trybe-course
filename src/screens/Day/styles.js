@@ -1,7 +1,8 @@
 import styled from 'styled-components/native';
-import { ActivityIndicator, Text } from 'react-native-paper';
+import { Text } from 'react-native-paper';
+import { TrybeLoading } from '../../components/TrybeLoading';
 
-export const LoadingBackdrop = styled(ActivityIndicator)`
+export const LoadingBackdrop = styled(TrybeLoading)`
   background-color: ${({ theme }) => theme.colors.background};
   flex: 1;
 `;

@@ -6,6 +6,7 @@ export default {
     colors: {
       ...MD3LightTheme.colors,
       background: '#f9f9f9',
+      accent: '#42197f',
       primary: '#2fc18c',
       secondary: '#003be5',
       tertiary: '#036b52',
@@ -27,6 +28,7 @@ export default {
     colors: {
       ...MD3DarkTheme.colors,
       background: '#1c1b1f',
+      accent: '#42197f',
       primary: '#2fc18c',
       primaryContainer: '#003be5',
       secondary: '#003be5',

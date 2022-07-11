@@ -1,9 +1,9 @@
 import styled from 'styled-components/native';
-import { ActivityIndicator } from 'react-native-paper';
+import { TrybeLoading } from '../../components/TrybeLoading';
 import { Button } from '../../components/Button';
 import { Divider } from '../../components/Divider';
 
-export const LoadingBackdrop = styled(ActivityIndicator)`
+export const LoadingBackdrop = styled(TrybeLoading)`
   flex: 1;
 `;
 
