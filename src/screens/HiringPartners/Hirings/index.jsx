@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
-import { LoadingContainer, Loading, List, Card } from './styles';
+import { LoadingContainer, Loading, List, Card, NotFoundTitle, NotFoundCaption } from './styles';
 import axios from 'axios';
 import api from '../../../services/api';
 
-export function Hirings() {
+export function Hirings({ query }) {
   const { user } = useSelector(state => state.configs);
   const { navigate } = useNavigation();
   const controller = new AbortController();
@@ -15,26 +15,34 @@ export function Hirings() {
   const [loading, setLoading] = useState(false);
   const [total, setTotal] = useState(0);
 
-  const loadPage = useCallback(async (pageNumber = page) => {
-    if (total && pageNumber > total) return;
-
+  const loadPage = useCallback(async (pageNumber = page, shouldRefresh) => {
+    if (!shouldRefresh && total && pageNumber > total) return;
     setLoading(true);
 
     try {
-      const companies = await api.companies(user.access_token, controller.signal);
-      setTotal(Math.ceil(companies.length / 10));
-      setViewContent(companies.slice(0, pageNumber * 10));
-      setPage(page + 1);
+      const companies = await api.companies(user.access_token, query, controller.signal);
+      setTotal(Math.ceil(companies.length / 50));
+      setViewContent(companies.slice(0, pageNumber * 50));
+      setPage(pageNumber + 1);
       setLoading(false);
     } catch (err) {
       if (!axios.isCancel(err)) console.warn(err);
     }
-  }, [page]);
+  }, [query, page]);
 
   useEffect(() => {
-    loadPage();
-    return () => controller.abort();
-  }, []);
+    setViewContent([]);
+    loadPage(1, true);
+  }, [query]);
+
+  useEffect(() => () => controller.abort(), []);
+
+  if (viewContent.length === 0 && !loading) return (
+    <>
+      <NotFoundTitle variant="headlineSmall">Ainda não há empresas para a sua busca! 😢</NotFoundTitle>
+      <NotFoundCaption>Por favor, ajuste os filtros e tente novamente.</NotFoundCaption>
+    </>
+  );
 
   return (
     <List

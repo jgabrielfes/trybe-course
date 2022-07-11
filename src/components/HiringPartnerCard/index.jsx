@@ -32,10 +32,12 @@ export const HiringPartnerCard = memo(({ company, onPress, ...rest }) => {
           />
           <HeaderSubContainer>
             <Title variant="titleLarge">{company.name}</Title>
-            <LocationContainer>
-              <LocationIcon name="location-pin" />
-              <LocationLabel>{company.location.city} / {company.location.federative_unit}</LocationLabel>
-            </LocationContainer>
+            {company.location && (
+              <LocationContainer>
+                <LocationIcon name="location-pin" />
+                <LocationLabel>{company.location.city} / {company.location.federative_unit}</LocationLabel>
+              </LocationContainer>
+            )}
           </HeaderSubContainer>
         </HeaderContainer>
         <Description numberOfLines={3}>{company.description}</Description>

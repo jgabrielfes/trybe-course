@@ -8,6 +8,7 @@ export default {
       background: '#f9f9f9',
       accent: '#42197f',
       primary: '#2fc18c',
+      primaryContainer: '#e9e3f1',
       secondary: '#003be5',
       tertiary: '#036b52',
       surfaceVariant: '#e7e0ec',

@@ -26,8 +26,8 @@ export default {
     return data;
   },
 
-  companies: async (token, signal) => {
-    const { data } = await axios.get('https://apig.betrybe.com/api/student_success/v1/companies', {
+  companies: async (token, query, signal) => {
+    const { data } = await axios.get(`https://apig.betrybe.com/api/student_success/v1/companies${query ? `?query=${query}&active=true` : ''}`, {
       headers: { Authorization: `Bearer ${token}` },
       signal,
     });
