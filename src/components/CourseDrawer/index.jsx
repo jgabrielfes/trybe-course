@@ -31,7 +31,7 @@ export function CourseDrawer({ navigation }) {
       <Item
         icon={props => <MaterialIcons {...props} name="computer" />}
         label="Projetos"
-        right={props => activeProjects ? <Notification {...props}>{activeProjects}</Notification> : undefined}
+        right={props => <Notification {...props} visible={!!activeProjects}>{activeProjects}</Notification>}
         onPress={() => {
           navigation.closeDrawer();
           navigation.navigate('projects');

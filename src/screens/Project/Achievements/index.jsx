@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Container } from './styles';
+import { Container, Loader } from './styles';
 import axios from 'axios';
 import api from '../../../services/api';
 import { achievementsMap } from '../../../utils/achievements';
@@ -14,7 +14,7 @@ export function Achievements({ projectId }) {
     async function load() {
       try {
         const { achievements: data } = await api.project(projectId, user.access_token, controller.signal)
-        setAchievements(data);
+        setAchievements(data.filter(achievement => achievement.unlocked));
       } catch (err) {
         if (!axios.isCancel(err)) console.warn(err);
       }
@@ -24,7 +24,7 @@ export function Achievements({ projectId }) {
     return () => controller.abort();
   }, [])
 
-  if (!achievements) return null;
+  if (!achievements) return <Loader />;
 
   return achievements.map((achievement, index) => (
     <Container
