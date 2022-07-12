@@ -39,6 +39,7 @@ export const LabelIcon = styled(MaterialIcons)`
 `;
 
 export const Label = styled(Text)`
+  flex: 1;
   opacity: 0.7;
 `;
 
